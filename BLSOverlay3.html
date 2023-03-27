@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <style>
+            
+            #timer {
+                position: absolute;
+                top: 0%;
+                left: 50%; 
+                transform: translateX(-50%); 
+                height: 95px;
+                width: 260px;
+                margin-right: 10px;
+                color: white;
+                font-size: 70px;
+                font-family: 'Courier New', Courier, monospace;
+                background: linear-gradient(to right, var(--left-primary) -10%, var(--right-primary) 140%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-shadow: -3px 0 10px black;
+                box-shadow: 0 0 0 5px rgb(0, 0, 0);
+                z-index: 2;
+            }
+            #left-score {
+                position: absolute;
+                height: 95px;
+                width: 600px;
+                top: 0;
+                left: 11.5%;
+                color: white;
+                font-size: 70px;
+                font-family: 'Courier New', Courier, monospace;
+                background-image: linear-gradient(to right, var(--left-primary), black);
+                background-position: 0 0;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding-right: 10px;
+                text-shadow: -3px 0 10px black;
+                box-shadow: 0 0 0 5px rgb(0, 0, 0);
+                z-index: 1;
+            }
+            #right-score {
+                position: absolute;
+                height: 95px;
+                width: 600px;
+                top: 0;
+                right: 11.5%;
+                color: white;
+                font-size: 70px;
+                font-family: 'Courier New', Courier, monospace;
+                background-image: linear-gradient(to left, var(--right-primary), black);
+                background-position: 0 0;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding-left: 10px;
+                text-shadow: -3px 0 10px black;
+                box-shadow: 0 0 0 5px rgb(0, 0, 0);
+                z-index: 1;
+            }
+
+            .left-name-container {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                height: 95px;
+                width: 410px;
+                top: -.2%;
+                left: 17%;
+            }
+            #left-name {
+                color: white;
+                font-size: 70px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 3;
+                white-space: nowrap;
+                overflow: hidden;
+                text-shadow: -3px 0 10px black;
+            }
+            .right-name-container {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                height: 95px;
+                width: 400px;
+                top: -.2%;
+                right: 17.15%;
+            }
+            #right-name {
+                color: white;
+                font-size: 70px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 3;
+                white-space: nowrap;
+                overflow: hidden;
+                text-shadow: -3px 0 10px black;
+            }
+
+            .logo-left {
+                position: absolute;
+                top: .5px;
+                left: 11.2%;
+                height: 94px;
+                width: 94px;
+                margin-right: 10px;
+                color: white;
+                z-index: 3;
+            }
+            .logo-right {
+                position: absolute;
+                top: .5px;
+                right: 11%;
+                height: 94px;
+                width: 94px;
+                margin-right: 10px;
+                color: white;
+                z-index: 3;
+            }
+
+            #left-name-1 {
+                position: absolute;
+                top: 20%;
+                left: 0%;
+                height: 60px;
+                width: 350px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                background: linear-gradient(to right, var(--left-primary), var(--left-secondary));
+                display: flex;
+                justify-content: flex-start;
+                padding-left: 5px;
+                z-index: 1;
+                text-shadow: -3px 0 10px black;
+            }
+            #left-score-1 {
+                position: absolute;
+                top: 20%;
+                left: 9%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-goal-1 {
+                position: absolute;
+                top: 20%;
+                left: 13%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-assist-1 {
+                position: absolute;
+                top: 20%;
+                left: 16%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-boost-1 {
+                position: absolute;
+                top: 22.7%;
+                left: .15%;
+                height: 28px;
+                width: 335px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                display: flex;
+                align-self: right;
+                justify-content: flex-end;
+                padding-right: 10px;
+                z-index: 2;
+                background: linear-gradient(to right, black var(--leftBoostBar1), grey var(--leftBoostBar1));
+            }
+            #left-saves-1 {
+                position: absolute;
+                top: 20%;
+                left: 22%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            
+            #right-name-5 {
+                position: absolute;
+                top: 20%;
+                right: 0%;
+                height: 60px;
+                width: 350px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                background: linear-gradient(to left, var(--right-primary), var(--right-secondary));
+                display: flex;
+                justify-content: flex-end;
+                padding-right: 5px;
+                z-index: 1;
+                text-shadow: -3px 0 10px black;
+            }
+            #right-score-5 {
+                position: absolute;
+                top: 20%;
+                right: 9%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-goal-5 {
+                position: absolute;
+                top: 20%;
+                right: 13%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-assist-5 {
+                position: absolute;
+                top: 20%;
+                right: 16%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-boost-5 {
+                position: absolute;
+                top: 22.8%;
+                right: .15%;
+                height: 28px;
+                width: 335px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                display: flex;
+                align-self: right;
+                justify-content: flex-start;
+                padding-right: 10px;
+                z-index: 2;
+                background: linear-gradient(to left, black var(--rightBoostBar5), grey var(--rightBoostBar5));
+            }
+            #right-saves-5 {
+                position: absolute;
+                top: 20%;
+                right: 22%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            
+            #left-name-2 {
+                position: absolute;
+                top: 26%;
+                left: 0%;
+                height: 60px;
+                width: 350px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                background: linear-gradient(to right, var(--left-primary), var(--left-secondary));
+                display: flex;
+                justify-content: flex-start;
+                padding-left: 5px;
+                z-index: 1;
+                text-shadow: -3px 0 10px black;
+            }
+            #left-score-2 {
+                position: absolute;
+                top: 26%;
+                left: 9%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-goal-2 {
+                position: absolute;
+                top: 26%;
+                left: 13%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-assist-2 {
+                position: absolute;
+                top: 26%;
+                left: 16%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-boost-2 {
+                position: absolute;
+                top: 28.8%;
+                left: .15%;
+                height: 28px;
+                width: 335px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                display: flex;
+                align-self: right;
+                justify-content: flex-end;
+                padding-right: 10px;
+                z-index: 2;
+                background: linear-gradient(to right, black var(--leftBoostBar2), grey var(--leftBoostBar2));
+            }
+            #left-saves-2 {
+                position: absolute;
+                top: 26%;
+                left: 22%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+
+            #right-name-6 {
+                position: absolute;
+                top: 26%;
+                right: 0%;
+                height: 60px;
+                width: 350px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                background: linear-gradient(to left, var(--right-primary), var(--right-secondary));
+                display: flex;
+                justify-content: flex-end;
+                padding-right: 5px;
+                z-index: 1;
+                text-shadow: -3px 0 10px black;
+            }
+            #right-score-6 {
+                position: absolute;
+                top: 26%;
+                right: 9%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-goal-6 {
+                position: absolute;
+                top: 26%;
+                right: 13%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-assist-6 {
+                position: absolute;
+                top: 26%;
+                right: 16%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-boost-6 {
+                position: absolute;
+                top: 28.8%;
+                right: .15%;
+                height: 28px;
+                width: 335px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                display: flex;
+                align-self: right;
+                justify-content: flex-start;
+                padding-right: 10px;
+                z-index: 2;
+                background: linear-gradient(to left, black var(--rightBoostBar6), grey var(--rightBoostBar6));
+            }
+            #right-saves-6 {
+                position: absolute;
+                top: 26%;
+                right: 22%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            
+            #left-name-3 {
+                position: absolute;
+                top: 32%;
+                left: 0%;
+                height: 60px;
+                width: 350px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                background: linear-gradient(to right, var(--left-primary), var(--left-secondary));
+                display: flex;
+                justify-content: flex-start;
+                padding-left: 5px;
+                z-index: 1;
+                text-shadow: -3px 0 10px black;
+            }
+            #left-score-3 {
+                position: absolute;
+                top: 32%;
+                left: 9%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-goal-3 {
+                position: absolute;
+                top: 32%;
+                left: 13%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-assist-3 {
+                position: absolute;
+                top: 32%;
+                left: 16%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-boost-3 {
+                position: absolute;
+                top: 34.8%;
+                left: .15%;
+                height: 28px;
+                width: 335px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                display: flex;
+                align-self: right;
+                justify-content: flex-end;
+                padding-right: 10px;
+                z-index: 2;
+                background: linear-gradient(to right, black var(--leftBoostBar3), grey var(--leftBoostBar3));
+            }
+            #left-saves-3 {
+                position: absolute;
+                top: 32%;
+                left: 22%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+
+            #right-name-7 {
+                position: absolute;
+                top: 32%;
+                right: 0%;
+                height: 60px;
+                width: 350px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                background: linear-gradient(to left, var(--right-primary), var(--right-secondary));
+                display: flex;
+                justify-content: flex-end;
+                padding-right: 5px;
+                z-index: 1;
+                text-shadow: -3px 0 10px black;
+            }
+            #right-score-7 {
+                position: absolute;
+                top: 32%;
+                right: 9%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-goal-7 {
+                position: absolute;
+                top: 32%;
+                right: 13%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-assist-7 {
+                position: absolute;
+                top: 32%;
+                right: 16%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-boost-7 {
+                position: absolute;
+                top: 34.8%;
+                right: .15%;
+                height: 28px;
+                width: 335px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                display: flex;
+                align-self: right;
+                justify-content: flex-start;
+                padding-right: 10px;
+                z-index: 2;
+                background: linear-gradient(to left, black var(--rightBoostBar7), grey var(--rightBoostBar7));
+            }
+            #right-saves-7 {
+                position: absolute;
+                top: 32%;
+                right: 22%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            
+            #left-name-4 {
+                position: absolute;
+                top: 38%;
+                left: 0%;
+                height: 60px;
+                width: 350px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                background: linear-gradient(to right, var(--left-primary), var(--left-secondary));
+                display: flex;
+                justify-content: flex-start;
+                padding-left: 5px;
+                z-index: 1;
+                text-shadow: -3px 0 10px black;
+            }
+            #left-score-4 {
+                position: absolute;
+                top: 38%;
+                left: 9%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-goal-4 {
+                position: absolute;
+                top: 38%;
+                left: 13%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-assist-4 {
+                position: absolute;
+                top: 38%;
+                left: 16%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #left-boost-4 {
+                position: absolute;
+                top: 40.8%;
+                left: .15%;
+                height: 28px;
+                width: 335px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                display: flex;
+                align-self: right;
+                justify-content: flex-end;
+                padding-right: 10px;
+                z-index: 2;
+                background: linear-gradient(to right, black var(--leftBoostBar4), grey var(--leftBoostBar4));
+            }
+            #left-saves-4 {
+                position: absolute;
+                top: 38%;
+                left: 22%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            
+            #right-name-8 {
+                position: absolute;
+                top: 38%;
+                right: 0%;
+                height: 60px;
+                width: 350px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                background: linear-gradient(to left, var(--right-primary), var(--right-secondary));
+                display: flex;
+                justify-content: flex-end;
+                padding-right: 5px;
+                z-index: 1;
+                text-shadow: -3px 0 10px black;
+            }
+            #right-score-8{
+                position: absolute;
+                top: 38%;
+                right: 9%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-goal-8 {
+                position: absolute;
+                top: 38%;
+                right: 13%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-assist-8 {
+                position: absolute;
+                top: 38%;
+                right: 16%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-boost-8 {
+                position: absolute;
+                top: 40.8%;
+                right: .15%;
+                height: 28px;
+                width: 335px;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                display: flex;
+                align-self: right;
+                justify-content: flex-start;
+                padding-right: 10px;
+                z-index: 2;
+                background: linear-gradient(to left, black var(--rightBoostBar8), grey var(--rightBoostBar8));
+            }
+            #right-saves-8 {
+                position: absolute;
+                top: 38%;
+                right: 22%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            
+            #left-spectate {
+                position: absolute;
+                top: 70%;
+                left: 35%;
+                color: white;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            #right-spectate {
+                position: absolute;
+                top: 70%;
+                right: 35%;
+                color: red;
+                font-size: 24px;
+                font-family: 'Courier New', Courier, monospace;
+                z-index: 2;
+            }
+            
+            .scorebug.left .team.left .target::after {
+                content: "";
+            }
+
+            .scorebug.right .team.right .target::after {
+                content: "";
+            }
+
+            .scorebug.left .team.left .target::before {
+                content: "Player: ";
+            }
+
+            .scorebug.right .team.right .target::before {
+                content: "Player: ";
+            }
+
+            .scorebug.left .team.left .target[data-target="left"]::after {
+                content: "1-4";
+            }
+
+            .scorebug.right .team.right .target[data-target="right"]::after {
+                content: "5-8";
+            }
+        </style>
+
+        <body>
+            <div id="timer">0:00</div>
+            <div class="scorebug left">
+                <table class="team-info">
+                    <th>
+                        <img class="logo-left" src="C:/Users/dashl/Pictures/BLS/Logos/spartans.png" alt="Blue Logo"> 
+                    </th>
+                    <tr class="left team">
+                        <td>
+                            <div id="left-score" class="score">0</div>
+                            <div id="left-spectate" class="target"></div>
+                            <div class="left-name-container">
+                                <div id="left-name" class="teamname"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="team left one">
+                        <td>
+                            <div id="left-boost-1" class="boost">0</div>
+                            <div id="left-assist-1" class="assist">0</div>
+                            <div id="left-goal-1" class="goal">0</div>
+                            <div id="left-name-1" class="name">0</div>
+                            <div id="left-score-1" class="score">0</div>
+                            <div id="left-saves-1" class="saves">0</div>
+                            
+                        </td>
+                    </tr>
+                    <tr class="team left two">
+                        <td>
+                            <div id="left-boost-2" class="boost">0</div>
+                            <div id="left-assist-2" class="assist">0</div>
+                            <div id="left-goal-2" class="goal">0</div>
+                            <div id="left-name-2" class="name">0</div>
+                            <div id="left-score-2" class="score">0</div>
+                            <div id="left-saves-2" class="saves">0</div>
+                            
+                        </td>
+                    </tr>
+                    <tr class="team left three">
+                        <td>
+                            <div id="left-boost-3" class="boost">0</div>
+                            <div id="left-assist-3" class="assist">0</div>
+                            <div id="left-goal-3" class="goal">0</div>
+                            <div id="left-name-3" class="name">0</div>
+                            <div id="left-score-3" class="score">0</div>
+                            <div id="left-saves-3" class="saves">0</div>
+                            
+                        </td>
+                    </tr>
+                    <tr class="team left four">
+                        <td>
+                            <div id="left-boost-4" class="boost">0</div>
+                            <div id="left-assist-4" class="assist">0</div>
+                            <div id="left-goal-4" class="goal">0</div>
+                            <div id="left-name-4" class="name">0</div>
+                            <div id="left-score-4" class="score">0</div>
+                            <div id="left-saves-4" class="saves">0</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="scorebug right">
+                <table class="team-info">
+                    <th>
+                        <img class="logo-right" src="C:\Users\dashl\Pictures\BLS\Logos\Shoguns.png" alt="Orange Logo">
+                    </th>
+                    <tr class="team right">
+                        <td>
+                            <div id="right-score" class="score">0</div>
+                            <div id="right-spectate" class="target"></div>
+                            <div class="right-name-container">
+                                <div id="right-name" class="teamname"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="team right five">
+                        <td>
+                            <div id="right-boost-5" class="boost">0</div>
+                            <div id="right-assist-5" class="assist">0</div>
+                            <div id="right-goal-5" class="goal">0</div>
+                            <div id="right-name-5" class="name">0</div>
+                            <div id="right-score-5" class="score">0</div>
+                            <div id="right-saves-5" class="saves">0</div>
+
+                        </td>
+                    </tr>
+                    <tr class="team right six">
+                        <td>
+                            <div id="right-boost-6" class="boost">0</div>
+                            <div id="right-assist-6" class="assist">0</div>
+                            <div id="right-goal-6" class="goal">0</div>
+                            <div id="right-name-6" class="name">0</div>
+                            <div id="right-score-6" class="score">0</div>
+                            <div id="right-saves-6" class="saves">0</div>
+
+                        </td>
+                    </tr>
+                    <tr class="team right seven">
+                        <td>
+                            <div id="right-boost-7" class="boost">0</div>
+                            <div id="right-assist-7" class="assist">0</div>
+                            <div id="right-goal-7" class="goal">0</div>
+                            <div id="right-name-7" class="name">0</div>
+                            <div id="right-score-7" class="score">0</div>
+                            <div id="right-saves-7" class="saves">0</div>
+
+                        </td>
+                    </tr>
+                    <tr class="team right eight">
+                        <td>
+                            <div id="right-boost-8" class="boost">0</div>
+                            <div id="right-assist-8" class="assist">0</div>
+                            <div id="right-goal-8" class="goal">0</div>
+                            <div id="right-name-8" class="name">0</div>
+                            <div id="right-score-8" class="score">0</div>
+                            <div id="right-saves-8" class="saves">0</div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div> 
+        </body>
+
+        <script>
+            const WsSubscribers = {
+                __subscribers: {},
+                websocket: undefined,
+                webSocketConnected: false,
+                registerQueue: [],
+                init: function(port, debug, debugFilters) {
+                    port = port || 49122;
+                    debug = debug || false;
+                    if (debug) {
+                        if (debugFilters !== undefined) {
+                            console.warn("WebSocket Debug Mode enabled with filtering. Only events not in the filter list will be dumped");
+                        } else {
+                            console.warn("WebSocket Debug Mode enabled without filters applied. All events will be dumped to console");
+                            console.warn("To use filters, pass in an array of 'channel:event' strings to the second parameter of the init function");
+                        }
+                    }
+                    WsSubscribers.webSocket = new WebSocket("ws://localhost:" + port);
+                    WsSubscribers.webSocket.onmessage = function (event) {
+                        let jEvent = JSON.parse(event.data);
+                        if (!jEvent.hasOwnProperty('event')) {
+                            return;
+                        }
+                        let eventSplit = jEvent.event.split(':');
+                        let channel = eventSplit[0];
+                        let event_event = eventSplit[1];
+                        if (debug) {
+                            if (!debugFilters) {
+                                console.log(channel, event_event, jEvent);
+                            } else if (debugFilters && debugFilters.indexOf(jEvent.event) < 0) {
+                                console.log(channel, event_event, jEvent);
+                            }
+                        }
+                        WsSubscribers.triggerSubscribers(channel, event_event, jEvent.data);
+                    };
+                    WsSubscribers.webSocket.onopen = function () {
+                        WsSubscribers.triggerSubscribers("ws", "open");
+                        WsSubscribers.webSocketConnected = true;
+                        WsSubscribers.registerQueue.forEach((r) => {
+                            WsSubscribers.send("wsRelay", "register", r);
+                        });
+                        WsSubscribers.registerQueue = [];
+                    };
+                    WsSubscribers.webSocket.onerror = function () {
+                        WsSubscribers.triggerSubscribers("ws", "error");
+                        WsSubscribers.webSocketConnected = false;
+                    };
+                    WsSubscribers.webSocket.onclose = function () {
+                        WsSubscribers.triggerSubscribers("ws", "close");
+                        WsSubscribers.webSocketConnected = false;
+                    };
+                },
+                /**
+                 * Add callbacks for when certain events are thrown
+                 * Execution is guaranteed to be in First In First Out order
+                 * @param channels
+                 * @param events
+                 * @param callback
+                 */
+                subscribe: function(channels, events, callback) {
+                    if (typeof channels === "string") {
+                        let channel = channels;
+                        channels = [];
+                        channels.push(channel);
+                    }
+                    if (typeof events === "string") {
+                        let event = events;
+                        events = [];
+                        events.push(event);
+                    }
+                    channels.forEach(function(c) {
+                        events.forEach(function (e) {
+                            if (!WsSubscribers.__subscribers.hasOwnProperty(c)) {
+                                WsSubscribers.__subscribers[c] = {};
+                            }
+                            if (!WsSubscribers.__subscribers[c].hasOwnProperty(e)) {
+                                WsSubscribers.__subscribers[c][e] = [];
+                                if (WsSubscribers.webSocketConnected) {
+                                    WsSubscribers.send("wsRelay", "register", `${c}:${e}`);
+                                } else {
+                                    WsSubscribers.registerQueue.push(`${c}:${e}`);
+                                }
+                            }
+                            WsSubscribers.__subscribers[c][e].push(callback);
+                        });
+                    })
+                },
+                clearEventCallbacks: function (channel, event) {
+                    if (WsSubscribers.__subscribers.hasOwnProperty(channel) && WsSubscribers.__subscribers[channel].hasOwnProperty(event)) {
+                        WsSubscribers.__subscribers[channel] = {};
+                    }
+                },
+                triggerSubscribers: function (channel, event, data) {
+                    if (WsSubscribers.__subscribers.hasOwnProperty(channel) && WsSubscribers.__subscribers[channel].hasOwnProperty(event)) {
+                        WsSubscribers.__subscribers[channel][event].forEach(function(callback) {
+                            if (callback instanceof Function) {
+                                callback(data);
+                            }
+                        });
+                    }
+                },
+                send: function (channel, event, data) {
+                    if (typeof channel !== 'string') {
+                        console.error("Channel must be a string");
+                        return;
+                    }
+                    if (typeof event !== 'string') {
+                        console.error("Event must be a string");
+                        return;
+                    }
+                    if (channel === 'local') {
+                        this.triggerSubscribers(channel, event, data);
+                    } else {
+                        let cEvent = channel + ":" + event;
+                        WsSubscribers.webSocket.send(JSON.stringify({
+                            'event': cEvent,
+                            'data': data
+                        }));
+                    }
+                }
+            };
+            
+            ///
+
+            $(() => {
+                WsSubscribers.init(49122, true);
+                WsSubscribers.subscribe("game", "update_state", (d) => {    //GameTime
+                    var minutes = Math.floor(d['game']['time_seconds'] / 60);
+                    var seconds = d['game']['time_seconds'] % 60;
+                    var timeString = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+                    $("#timer").text(timeString);
+                });
+                WsSubscribers.subscribe("game", "update_state", (d) => {    //GameScore
+                    console.log(d);
+                    // Update the scores of the teams on the scoreboard
+                    $(".scorebug.left .team.left .score").text(d['game']['teams'][0]['score']);
+                    $(".scorebug.right .team.right .score").text(d['game']['teams'][1]['score']);
+                })
+                WsSubscribers.subscribe("game", "update_state", (d) => {    //TeamColors
+                    $(".scorebug.left .left.team .primary").text(d['game']['teams'][0]['color_primary']);
+                    $(".scorebug.left .left.team .secondary").text(d['game']['teams'][0]['color_secondary']);
+                    $(".scorebug.right .right.team .primary").text(d['game']['teams'][1]['color_primary']);
+                    $(".scorebug.right .right.team .secondary").text(d['game']['teams'][1]['color_secondary']);
+
+                    function hexToRgb(hex) {
+                        var r = parseInt(hex.substring(0,2), 16);
+                        var g = parseInt(hex.substring(2,4), 16);
+                        var b = parseInt(hex.substring(4,6), 16);
+
+                        return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+                    }
+
+                    // Determine the background colors based on the update state
+                    var leftPrimaryColor = d['game']['teams'][0]['color_primary']; // Defining team 0 primary color
+                    var leftSecondaryColor = d['game']['teams'][0]['color_secondary']; // Defining team 0 secondary color
+                    var rightPrimaryColor = d['game']['teams'][1]['color_primary']; // Defining team 1 primary color
+                    var rightSecondaryColor = d['game']['teams'][1]['color_secondary']; // Defining team 1 secondary color
+
+                    var leftPrimaryRgb = hexToRgb(leftPrimaryColor);
+                    var leftSecondaryRgb = hexToRgb(leftSecondaryColor);
+                    var rightPrimaryRgb = hexToRgb(rightPrimaryColor);
+                    var rightSecondaryRgb = hexToRgb(rightSecondaryColor);
+
+                    
+                    // Set the CSS variables for the background colors of the scoreboard
+                    $("#left-score").css({
+                        "--left-primary": leftPrimaryRgb, // set the value of the CSS variable '--left-primary' to the left primary color
+                        "--left-secondary": leftSecondaryRgb // set the value of the CSS variable '--left-secondary' to the left secondary color
+                    });
+                    $("#right-score").css({
+                        "--right-primary": rightPrimaryRgb,
+                        "--right-secondary": rightSecondaryRgb
+                    });
+                    $("#timer").css({
+                        "--left-primary": leftPrimaryRgb,
+                        "--right-primary": rightPrimaryRgb,
+                        "--left-secondary": leftSecondaryRgb,
+                        "--right-secondary": rightSecondaryRgb
+                    });
+                    $("#left-name-1").css({
+                        "--left-primary": leftPrimaryRgb, 
+                        "--left-secondary": leftSecondaryRgb 
+                    });
+                    $("#left-name-2").css({
+                        "--left-primary": leftPrimaryRgb, 
+                        "--left-secondary": leftSecondaryRgb
+                    });
+                    $("#left-name-3").css({
+                        "--left-primary": leftPrimaryRgb, 
+                        "--left-secondary": leftSecondaryRgb
+                    });
+                    $("#left-name-4").css({
+                        "--left-primary": leftPrimaryRgb, 
+                        "--left-secondary": leftSecondaryRgb
+                    });
+                    $("#right-name-5").css({
+                        "--right-primary": rightPrimaryRgb,
+                        "--right-secondary": rightSecondaryRgb
+                    });
+                    $("#right-name-6").css({
+                        "--right-primary": rightPrimaryRgb,
+                        "--right-secondary": rightSecondaryRgb
+                    });
+                    $("#right-name-7").css({
+                        "--right-primary": rightPrimaryRgb,
+                        "--right-secondary": rightSecondaryRgb
+                    });
+                    $("#right-name-8").css({
+                        "--right-primary": rightPrimaryRgb,
+                        "--right-secondary": rightSecondaryRgb
+                    });
+                
+                });
+                WsSubscribers.subscribe("game", "update_state", (d) => { //TeamName
+                    $(".scorebug.left .left.team .teamname").text(d['game']['teams'][0]['name']);
+                    $(".scorebug.right .right.team .teamname").text(d['game']['teams'][1]['name']);
+                });
+
+                var player1 = '';
+                var player2 = '';
+                var player3 = '';
+                var player4 = '';
+                var player5 = '';
+                var player6 = '';
+                var player7 = '';
+                var player8 = '';
+
+                WsSubscribers.subscribe("game", "update_state", (d) => { /*Spectating*/
+                    const keys = Object.keys(d.players);
+                    const player1Key = keys.find((key) => key.includes('_1'));
+                    const player2Key = keys.find((key) => key.includes('_2'));
+                    const player3Key = keys.find((key) => key.includes('_3'));
+                    const player4Key = keys.find((key) => key.includes('_4'));
+                    const player5Key = keys.find((key) => key.includes('_5'));
+                    const player6Key = keys.find((key) => key.includes('_6'));
+                    const player7Key = keys.find((key) => key.includes('_7'));
+                    const player8Key = keys.find((key) => key.includes('_8'));
+
+                    player1 = player1Key ? player1Key : player1;
+                    player2 = player2Key ? player2Key : player2;
+                    player3 = player3Key ? player3Key : player3;
+                    player4 = player4Key ? player4Key : player4;
+                    player5 = player5Key ? player5Key : player5;
+                    player6 = player6Key ? player6Key : player6;
+                    player7 = player7Key ? player7Key : player7;
+                    player8 = player8Key ? player8Key : player8;
+
+                    $(".scorebug.left .team.left .target").text(d['game']['target']);
+                    $(".scorebug.right .team.right .target").text(d['game']['target']);
+
+                    const target = d['game']['target'];
+
+                    $(".scorebug.left .team.left .target").text(target);
+                    $(".scorebug.right .team.right .target").text(target);
+
+                    $(".scorebug.left .team.left .target").attr("data-target", target);
+                    $(".scorebug.right .team.right .target").attr("data-target", target);
+                })
+                WsSubscribers.subscribe("game", "update_state", (d) => { /*PlayerName*/
+                    const keys = Object.keys(d.players);
+                    const player1Key = keys.find((key) => key.includes('_1'));
+                    const player2Key = keys.find((key) => key.includes('_2'));
+                    const player3Key = keys.find((key) => key.includes('_3'));
+                    const player4Key = keys.find((key) => key.includes('_4'));
+                    const player5Key = keys.find((key) => key.includes('_5'));
+                    const player6Key = keys.find((key) => key.includes('_6'));
+                    const player7Key = keys.find((key) => key.includes('_7'));
+                    const player8Key = keys.find((key) => key.includes('_8'));
+
+                    player1 = player1Key ? player1Key : player1;
+                    player2 = player2Key ? player2Key : player2;
+                    player3 = player3Key ? player3Key : player3;
+                    player4 = player4Key ? player4Key : player4;
+                    player5 = player5Key ? player5Key : player5;
+                    player6 = player6Key ? player6Key : player6;
+                    player7 = player7Key ? player7Key : player7;
+                    player8 = player8Key ? player8Key : player8;
+
+                    $(".scorebug.left .team.left.one .name").text(d['players'][player1]['name']);
+                    $(".scorebug.left .team.left.two .name").text(d['players'][player2]['name']);
+                    $(".scorebug.left .team.left.three .name").text(d['players'][player3]['name']);
+                    $(".scorebug.left .team.left.four .name").text(d['players'][player4]['name']);
+                    $(".scorebug.right .team.right.five .name").text(d['players'][player5]['name']);
+                    $(".scorebug.right .team.right.six .name").text(d['players'][player6]['name']);
+                    $(".scorebug.right .team.right.seven .name").text(d['players'][player7]['name']);
+                    $(".scorebug.right .team.right.eight .name").text(d['players'][player8]['name']);
+
+                    var leftName1 = d['players'][player1]['name'];
+                    var leftName2 = d['players'][player2]['name'];
+                    var leftName3 = d['players'][player3]['name'];
+                    var leftName4 = d['players'][player4]['name'];
+                    var rightName5 = d['players'][player5]['name'];
+                    var rightName6 = d['players'][player6]['name'];
+                    var rightName7 = d['players'][player7]['name'];
+                    var rightName8 = d['players'][player8]['name'];
+
+                    $("#left-spectate").css({
+                        "--leftName1" : leftName1, //set the value of the CSS variable '--leftName1' to player 1 name
+                        "--leftName2" : leftName2, //set the value of the CSS variable '--leftName2' to player 2 name
+                        "--leftName3" : leftName3, //set the value of the CSS variable '--leftName3' to player 3 name
+                        "--leftName4" : leftName4, //set the value of the CSS variable '--leftName4' to player 4 name
+                    });
+
+                    $("#right-spectate").css({
+                        "--rightName5" : rightName5, //set the value of the CSS variable '--rightName5' to player 5 name
+                        "--rightName6" : rightName6, //set the value of the CSS variable '--rightName6' to player 6 name
+                        "--rightName7" : rightName7, //set the value of the CSS variable '--rightName7' to player 7 name
+                        "--rightName8" : rightName8, //set the value of the CSS variable '--rightName8' to player 8 name
+                    });
+                })
+                WsSubscribers.subscribe("game", "update_state", (d) => { /*PlayerScore*/
+                    const keys = Object.keys(d.players);
+                    const player1Key = keys.find((key) => key.includes('_1'));
+                    const player2Key = keys.find((key) => key.includes('_2'));
+                    const player3Key = keys.find((key) => key.includes('_3'));
+                    const player4Key = keys.find((key) => key.includes('_4'));
+                    const player5Key = keys.find((key) => key.includes('_5'));
+                    const player6Key = keys.find((key) => key.includes('_6'));
+                    const player7Key = keys.find((key) => key.includes('_7'));
+                    const player8Key = keys.find((key) => key.includes('_8'));
+
+                    player1 = player1Key ? player1Key : player1;
+                    player2 = player2Key ? player2Key : player2;
+                    player3 = player3Key ? player3Key : player3;
+                    player4 = player4Key ? player4Key : player4;
+                    player5 = player5Key ? player5Key : player5;
+                    player6 = player6Key ? player6Key : player6;
+                    player7 = player7Key ? player7Key : player7;
+                    player8 = player8Key ? player8Key : player8;
+
+                    $(".scorebug.left .team.left.one .score").text(d['players'][player1]['score']);
+                    $(".scorebug.left .team.left.two .score").text(d['players'][player2]['score']);
+                    $(".scorebug.left .team.left.three .score").text(d['players'][player3]['score']);
+                    $(".scorebug.left .team.left.four .score").text(d['players'][player4]['score']);
+                    $(".scorebug.right .team.right.five .score").text(d['players'][player5]['score']);
+                    $(".scorebug.right .team.right.six .score").text(d['players'][player6]['score']);
+                    $(".scorebug.right .team.right.seven .score").text(d['players'][player7]['score']);
+                    $(".scorebug.right .team.right.eight .score").text(d['players'][player8]['score']);
+
+                    var leftScore1 = d['players'][player1]['score'];
+                    var leftScore2 = d['players'][player2]['score'];
+                    var leftScore3 = d['players'][player3]['score'];
+                    var leftScore4 = d['players'][player4]['score'];
+                    var rightScore5 = d['players'][player5]['score'];
+                    var rightScore6 = d['players'][player6]['score'];
+                    var rightScore7 = d['players'][player7]['score'];
+                    var rightScore8 = d['players'][player8]['score'];
+
+                    $("#left-spectate").css({
+                        "--leftScore1" : leftScore1, //set the value of the CSS variable '--leftScore1' to player 1 score
+                        "--leftScore2" : leftScore2, //set the value of the CSS variable '--leftScore2' to player 2 score
+                        "--leftScore3" : leftScore3, //set the value of the CSS variable '--leftScore3' to player 3 score
+                        "--leftScore4" : leftScore4, //set the value of the CSS variable '--leftScore4' to player 4 score
+                    });
+
+                    $("#right-spectate").css({
+                        "--rightScore5" : rightScore5, //set the value of the CSS variable '--rightScore5' to player 5 score
+                        "--rightScore6" : rightScore6, //set the value of the CSS variable '--rightScore6' to player 6 score
+                        "--rightScore7" : rightScore7, //set the value of the CSS variable '--rightScore7' to player 7 score
+                        "--rightScore8" : rightScore8, //set the value of the CSS variable '--rightScore8' to player 8 score
+                    });
+                })
+                WsSubscribers.subscribe("game", "update_state", (d) => { /*PlayerGoals*/
+                    const keys = Object.keys(d.players);
+                    const player1Key = keys.find((key) => key.includes('_1'));
+                    const player2Key = keys.find((key) => key.includes('_2'));
+                    const player3Key = keys.find((key) => key.includes('_3'));
+                    const player4Key = keys.find((key) => key.includes('_4'));
+                    const player5Key = keys.find((key) => key.includes('_5'));
+                    const player6Key = keys.find((key) => key.includes('_6'));
+                    const player7Key = keys.find((key) => key.includes('_7'));
+                    const player8Key = keys.find((key) => key.includes('_8'));
+
+                    player1 = player1Key ? player1Key : player1;
+                    player2 = player2Key ? player2Key : player2;
+                    player3 = player3Key ? player3Key : player3;
+                    player4 = player4Key ? player4Key : player4;
+                    player5 = player5Key ? player5Key : player5;
+                    player6 = player6Key ? player6Key : player6;
+                    player7 = player7Key ? player7Key : player7;
+                    player8 = player8Key ? player8Key : player8;
+
+                    $(".scorebug.left .team.left.one .goal").text(d['players'][player1]['goals']);
+                    $(".scorebug.left .team.left.two .goal").text(d['players'][player2]['goals']);
+                    $(".scorebug.left .team.left.three .goal").text(d['players'][player3]['goals']);
+                    $(".scorebug.left .team.left.four .goal").text(d['players'][player4]['goals']);
+                    $(".scorebug.right .team.right.five .goal").text(d['players'][player5]['goals']);
+                    $(".scorebug.right .team.right.six .goal").text(d['players'][player6]['goals']);
+                    $(".scorebug.right .team.right.seven .goal").text(d['players'][player7]['goals']);
+                    $(".scorebug.right .team.right.eight .goal").text(d['players'][player8]['goals']);
+
+                    var leftGoals1 = d['players'][player1]['goals'];
+                    var leftGoals2 = d['players'][player2]['goals'];
+                    var leftGoals3 = d['players'][player3]['goals'];
+                    var leftGoals4 = d['players'][player4]['goals'];
+                    var rightGoals5 = d['players'][player5]['goals'];
+                    var rightGoals6 = d['players'][player6]['goals'];
+                    var rightGoals7 = d['players'][player7]['goals'];
+                    var rightGoals8 = d['players'][player8]['goals'];
+
+                    $("#left-spectate").css({
+                        "--leftGoals1" : leftGoals1, //set the value of the CSS variable '--leftGoals1' to player 1 goals
+                        "--leftGoals2" : leftGoals2, //set the value of the CSS variable '--leftGoals2' to player 2 goals
+                        "--leftGoals3" : leftGoals3, //set the value of the CSS variable '--leftGoals3' to player 3 goals
+                        "--leftGoals4" : leftGoals4, //set the value of the CSS variable '--leftGoals4' to player 4 goals
+                    });
+
+                    $("#right-spectate").css({
+                        "--rightGoals5" : rightGoals5, //set the value of the CSS variable '--rightGoals5' to player 5 goals
+                        "--rightGoals6" : rightGoals6, //set the value of the CSS variable '--rightGoals6' to player 6 goals
+                        "--rightGoals7" : rightGoals7, //set the value of the CSS variable '--rightGoals7' to player 7 goals
+                        "--rightGoals8" : rightGoals8, //set the value of the CSS variable '--rightGoals8' to player 8 goals
+                    });
+                })
+                WsSubscribers.subscribe("game", "update_state", (d) => { /*PlayerAssists*/
+                    const keys = Object.keys(d.players);
+                    const player1Key = keys.find((key) => key.includes('_1'));
+                    const player2Key = keys.find((key) => key.includes('_2'));
+                    const player3Key = keys.find((key) => key.includes('_3'));
+                    const player4Key = keys.find((key) => key.includes('_4'));
+                    const player5Key = keys.find((key) => key.includes('_5'));
+                    const player6Key = keys.find((key) => key.includes('_6'));
+                    const player7Key = keys.find((key) => key.includes('_7'));
+                    const player8Key = keys.find((key) => key.includes('_8'));
+
+                    player1 = player1Key ? player1Key : player1;
+                    player2 = player2Key ? player2Key : player2;
+                    player3 = player3Key ? player3Key : player3;
+                    player4 = player4Key ? player4Key : player4;
+                    player5 = player5Key ? player5Key : player5;
+                    player6 = player6Key ? player6Key : player6;
+                    player7 = player7Key ? player7Key : player7;
+                    player8 = player8Key ? player8Key : player8;
+
+                    $(".scorebug.left .team.left.one .assist").text(d['players'][player1]['assists']);
+                    $(".scorebug.left .team.left.two .assist").text(d['players'][player2]['assists']);
+                    $(".scorebug.left .team.left.three .assist").text(d['players'][player3]['assists']);
+                    $(".scorebug.left .team.left.four .assist").text(d['players'][player4]['assists']);
+                    $(".scorebug.right .team.right.five .assist").text(d['players'][player5]['assists']);
+                    $(".scorebug.right .team.right.six .assist").text(d['players'][player6]['assists']);
+                    $(".scorebug.right .team.right.seven .assist").text(d['players'][player7]['assists']);
+                    $(".scorebug.right .team.right.eight .assist").text(d['players'][player8]['assists']);
+
+                    var leftAssists1 = d['players'][player1]['assists'];
+                    var leftAssists2 = d['players'][player2]['assists'];
+                    var leftAssists3 = d['players'][player3]['assists'];
+                    var leftAssists4 = d['players'][player4]['assists'];
+                    var rightAssists5 = d['players'][player5]['assists'];
+                    var rightAssists6 = d['players'][player6]['assists'];
+                    var rightAssists7 = d['players'][player7]['assists'];
+                    var rightAssists8 = d['players'][player8]['assists'];
+
+                    $("#left-spectate").css({
+                        "--leftAssists1" : leftAssists1, //set the value of the CSS variable '--leftAssists1' to player 1 assists
+                        "--leftAssists2" : leftAssists2, //set the value of the CSS variable '--leftAssists2' to player 2 assists
+                        "--leftAssists3" : leftAssists3, //set the value of the CSS variable '--leftAssists3' to player 3 assists
+                        "--leftAssists4" : leftAssists4, //set the value of the CSS variable '--leftAssists4' to player 4 assists
+                    });
+
+                    $("#right-spectate").css({
+                        "--rightAssists5" : rightAssists5, //set the value of the CSS variable '--rightAssists5' to player 5 assists
+                        "--rightAssists6" : rightAssists6, //set the value of the CSS variable '--rightAssists6' to player 6 assists
+                        "--rightAssists7" : rightAssists7, //set the value of the CSS variable '--rightAssists7' to player 7 assists
+                        "--rightAssists8" : rightAssists8, //set the value of the CSS variable '--rightAssists8' to player 8 assists
+                    });
+                })
+                WsSubscribers.subscribe("game", "update_state", (d) => { /*PlayerSaves*/
+                    const keys = Object.keys(d.players);
+                    const player1Key = keys.find((key) => key.includes('_1'));
+                    const player2Key = keys.find((key) => key.includes('_2'));
+                    const player3Key = keys.find((key) => key.includes('_3'));
+                    const player4Key = keys.find((key) => key.includes('_4'));
+                    const player5Key = keys.find((key) => key.includes('_5'));
+                    const player6Key = keys.find((key) => key.includes('_6'));
+                    const player7Key = keys.find((key) => key.includes('_7'));
+                    const player8Key = keys.find((key) => key.includes('_8'));
+
+                    player1 = player1Key ? player1Key : player1;
+                    player2 = player2Key ? player2Key : player2;
+                    player3 = player3Key ? player3Key : player3;
+                    player4 = player4Key ? player4Key : player4;
+                    player5 = player5Key ? player5Key : player5;
+                    player6 = player6Key ? player6Key : player6;
+                    player7 = player7Key ? player7Key : player7;
+                    player8 = player8Key ? player8Key : player8;
+
+                    $(".scorebug.left .team.left.one .saves").text(d['players'][player1]['saves']);
+                    $(".scorebug.left .team.left.two .saves").text(d['players'][player2]['saves']);
+                    $(".scorebug.left .team.left.three .saves").text(d['players'][player3]['saves']);
+                    $(".scorebug.left .team.left.four .saves").text(d['players'][player4]['saves']);
+                    $(".scorebug.right .team.right.five .saves").text(d['players'][player5]['saves']);
+                    $(".scorebug.right .team.right.six .saves").text(d['players'][player6]['saves']);
+                    $(".scorebug.right .team.right.seven .saves").text(d['players'][player7]['saves']);
+                    $(".scorebug.right .team.right.eight .saves").text(d['players'][player8]['saves']);
+
+                    var leftSaves1 = d['players'][player1]['saves'];
+                    var leftSaves2 = d['players'][player2]['saves'];
+                    var leftSaves3 = d['players'][player3]['saves'];
+                    var leftSaves4 = d['players'][player4]['saves'];
+                    var rightSaves5 = d['players'][player5]['saves'];
+                    var rightSaves6 = d['players'][player6]['saves'];
+                    var rightSaves7 = d['players'][player7]['saves'];
+                    var rightSaves8 = d['players'][player8]['saves'];
+
+                    $("#left-spectate").css({
+                        "--leftSaves1" : leftSaves1, //set the value of the CSS variable '--leftSaves1' to player 1 saves
+                        "--leftSaves2" : leftSaves2, //set the value of the CSS variable '--leftSaves2' to player 2 saves
+                        "--leftSaves3" : leftSaves3, //set the value of the CSS variable '--leftSaves3' to player 3 saves
+                        "--leftSaves4" : leftSaves4, //set the value of the CSS variable '--leftSaves4' to player 4 saves
+                    });
+
+                    $("#right-spectate").css({
+                        "--rightSaves5" : rightSaves5, //set the value of the CSS variable '--rightSaves5' to player 5 saves
+                        "--rightSaves6" : rightSaves6, //set the value of the CSS variable '--rightSaves6' to player 6 saves
+                        "--rightSaves7" : rightSaves7, //set the value of the CSS variable '--rightSaves7' to player 7 saves
+                        "--rightSaves8" : rightSaves8, //set the value of the CSS variable '--rightSaves8' to player 8 saves
+                    });
+                })
+                WsSubscribers.subscribe("game", "update_state", (d) => { /*PlayerShots*/
+                    const keys = Object.keys(d.players);
+                    const player1Key = keys.find((key) => key.includes('_1'));
+                    const player2Key = keys.find((key) => key.includes('_2'));
+                    const player3Key = keys.find((key) => key.includes('_3'));
+                    const player4Key = keys.find((key) => key.includes('_4'));
+                    const player5Key = keys.find((key) => key.includes('_5'));
+                    const player6Key = keys.find((key) => key.includes('_6'));
+                    const player7Key = keys.find((key) => key.includes('_7'));
+                    const player8Key = keys.find((key) => key.includes('_8'));
+
+                    player1 = player1Key ? player1Key : player1;
+                    player2 = player2Key ? player2Key : player2;
+                    player3 = player3Key ? player3Key : player3;
+                    player4 = player4Key ? player4Key : player4;
+                    player5 = player5Key ? player5Key : player5;
+                    player6 = player6Key ? player6Key : player6;
+                    player7 = player7Key ? player7Key : player7;
+                    player8 = player8Key ? player8Key : player8;
+
+                    $(".scorebug.left .team.left.one .shots").text(d['players'][player1]['shots']);
+                    $(".scorebug.left .team.left.two .shots").text(d['players'][player2]['shots']);
+                    $(".scorebug.left .team.left.three .shots").text(d['players'][player3]['shots']);
+                    $(".scorebug.left .team.left.four .shots").text(d['players'][player4]['shots']);
+                    $(".scorebug.right .team.right.five .shots").text(d['players'][player5]['shots']);
+                    $(".scorebug.right .team.right.six .shots").text(d['players'][player6]['shots']);
+                    $(".scorebug.right .team.right.seven .shots").text(d['players'][player7]['shots']);
+                    $(".scorebug.right .team.right.eight .shots").text(d['players'][player8]['shots']);
+
+                    var leftShots1 = d['players'][player1]['shots'];
+                    var leftShots2 = d['players'][player2]['shots'];
+                    var leftShots3 = d['players'][player3]['shots'];
+                    var leftShots4 = d['players'][player4]['shots'];
+                    var rightShots5 = d['players'][player5]['shots'];
+                    var rightShots6 = d['players'][player6]['shots'];
+                    var rightShots7 = d['players'][player7]['shots'];
+                    var rightShots8 = d['players'][player8]['shots'];
+
+                    $("#left-spectate").css({
+                        "--leftShots1" : leftShots1, //set the value of the CSS variable '--leftShots1' to player 1 shots
+                        "--leftShots2" : leftShots2, //set the value of the CSS variable '--leftShots2' to player 2 shots
+                        "--leftShots3" : leftShots3, //set the value of the CSS variable '--leftShots3' to player 3 shots
+                        "--leftShots4" : leftShots4, //set the value of the CSS variable '--leftShots4' to player 4 shots
+                    });
+
+                    $("#right-spectate").css({
+                        "--rightShots5" : rightShots5, //set the value of the CSS variable '--rightShots5' to player 5 shots
+                        "--rightShots6" : rightShots6, //set the value of the CSS variable '--rightShots6' to player 6 shots
+                        "--rightShots7" : rightShots7, //set the value of the CSS variable '--rightShots7' to player 7 shots
+                        "--rightShots8" : rightShots8, //set the value of the CSS variable '--rightShots8' to player 8 shots
+                    });
+                })
+                WsSubscribers.subscribe("game", "update_state", (d) => { /*PlayerBoost*/
+                    const keys = Object.keys(d.players);
+                    const player1Key = keys.find((key) => key.includes('_1'));
+                    const player2Key = keys.find((key) => key.includes('_2'));
+                    const player3Key = keys.find((key) => key.includes('_3'));
+                    const player4Key = keys.find((key) => key.includes('_4'));
+                    const player5Key = keys.find((key) => key.includes('_5'));
+                    const player6Key = keys.find((key) => key.includes('_6'));
+                    const player7Key = keys.find((key) => key.includes('_7'));
+                    const player8Key = keys.find((key) => key.includes('_8'));
+
+                    player1 = player1Key ? player1Key : player1;
+                    player2 = player2Key ? player2Key : player2;
+                    player3 = player3Key ? player3Key : player3;
+                    player4 = player4Key ? player4Key : player4;
+                    player5 = player5Key ? player5Key : player5;
+                    player6 = player6Key ? player6Key : player6;
+                    player7 = player7Key ? player7Key : player7;
+                    player8 = player8Key ? player8Key : player8;
+
+                    $(".scorebug.left .team.left.one .boost").text(d['players'][player1]['boost']);
+                    $(".scorebug.left .team.left.two .boost").text(d['players'][player2]['boost']);
+                    $(".scorebug.left .team.left.three .boost").text(d['players'][player3]['boost']);
+                    $(".scorebug.left .team.left.four .boost").text(d['players'][player4]['boost']);
+                    $(".scorebug.right .team.right.five .boost").text(d['players'][player5]['boost']);
+                    $(".scorebug.right .team.right.six .boost").text(d['players'][player6]['boost']);
+                    $(".scorebug.right .team.right.seven .boost").text(d['players'][player7]['boost']);
+                    $(".scorebug.right .team.right.eight .boost").text(d['players'][player8]['boost']);
+
+                    var leftBoost1 = d['players'][player1]['boost'];
+                    var leftBoost2 = d['players'][player2]['boost'];
+                    var leftBoost3 = d['players'][player3]['boost'];
+                    var leftBoost4 = d['players'][player4]['boost'];
+                    var rightBoost5 = d['players'][player5]['boost'];
+                    var rightBoost6 = d['players'][player6]['boost'];
+                    var rightBoost7 = d['players'][player7]['boost'];
+                    var rightBoost8 = d['players'][player8]['boost'];
+
+                    $("#left-boost-1").css({
+                        "--leftBoostBar1": leftBoost1 + '%', // set the value of the CSS variable '--leftBoostBar1' to the left primary color
+                    });
+                    $("#left-boost-2").css({
+                        "--leftBoostBar2": leftBoost2 + '%', // set the value of the CSS variable '--left-primary' to the left primary color
+                    });
+                    $("#left-boost-3").css({
+                        "--leftBoostBar3": leftBoost3 + '%', // set the value of the CSS variable '--left-primary' to the left primary color
+                    });
+                    $("#left-boost-4").css({
+                        "--leftBoostBar4": leftBoost4 + '%', // set the value of the CSS variable '--left-primary' to the left primary color
+                    });
+                    $("#right-boost-5").css({
+                        "--rightBoostBar5": rightBoost5 + '%', // set the value of the CSS variable '--left-primary' to the left primary color
+                    });
+                    $("#right-boost-6").css({
+                        "--rightBoostBar6": rightBoost6 + '%', // set the value of the CSS variable '--left-primary' to the left primary color
+                    });
+                    $("#right-boost-7").css({
+                        "--rightBoostBar7": rightBoost7 + '%', // set the value of the CSS variable '--left-primary' to the left primary color
+                    });
+                    $("#right-boost-8").css({
+                        "--rightBoostBar8": rightBoost8 + '%', // set the value of the CSS variable '--left-primary' to the left primary color
+                    });
+                })
+            })
+    </script>
+</html>
